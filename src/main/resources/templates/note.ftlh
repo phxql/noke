@@ -1,6 +1,6 @@
 <#-- @ftlvariable name="note" type="de.mkammerer.noke.business.Note" -->
 
-<#include "includes/header.ftl">
+<#include "includes/header.ftlh">
 
 <h1>${note.title}</h1>
 
@@ -9,7 +9,7 @@ ${note.content}
 </pre>
 
 <form action="<@spring.url "/note/${note.id}/delete"/>" method="post">
-    <input type="submit" value="Delete note"/>
+    <button type="submit" class="btn btn-danger">Delete note</button>
 </form>
 
-<#include "includes/footer.ftl">
+<#include "includes/footer.ftlh">

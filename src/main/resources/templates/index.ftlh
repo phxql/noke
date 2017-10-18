@@ -1,8 +1,8 @@
 <#-- @ftlvariable name="notes" type="java.util.List<de.mkammerer.noke.business.Note>" -->
 
-<#include "includes/header.ftl">
+<#include "includes/header.ftlh">
 
-<h1>Index</h1>
+<h1>Noke</h1>
 
 <ul>
 <#list notes as note>
@@ -15,4 +15,4 @@
 
 <a href="<@spring.url "note/add"/>">Add note</a>
 
-<#include "includes/footer.ftl">
+<#include "includes/footer.ftlh">
