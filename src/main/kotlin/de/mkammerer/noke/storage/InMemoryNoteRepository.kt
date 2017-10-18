@@ -2,13 +2,12 @@ package de.mkammerer.noke.storage
 
 import de.mkammerer.noke.business.Note
 import de.mkammerer.noke.business.NoteRepository
-import org.springframework.stereotype.Repository
 import reactor.core.publisher.Flux
 import reactor.core.publisher.Mono
 import java.util.*
 import java.util.concurrent.CopyOnWriteArrayList
 
-@Repository
+// @Repository
 class InMemoryNoteRepository : NoteRepository {
     private val notes: MutableList<Note> = CopyOnWriteArrayList<Note>()
 
