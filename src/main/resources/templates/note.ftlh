@@ -4,9 +4,9 @@
 
 <h1>${note.title}</h1>
 
-<pre>
-${note.content}
-</pre>
+<div>
+${note.html?no_esc}
+</div>
 
 <form action="<@spring.url "/note/${note.id}/delete"/>" method="post">
     <button type="submit" class="btn btn-danger">Delete note</button>

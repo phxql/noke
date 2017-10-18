@@ -31,7 +31,7 @@ class CassandraNoteRepository(
                 .defaultIfEmpty(true)
     }
 
-    private fun fromEntity(entity: NoteEntity): Note = Note(Note.Id(entity.id), entity.title, entity.content)
+    private fun fromEntity(entity: NoteEntity): Note = Note(Note.Id(entity.id), entity.title, entity.markdown, entity.html)
 
-    private fun toEntity(note: Note): NoteEntity = NoteEntity(note.id.id, note.title, note.content)
+    private fun toEntity(note: Note): NoteEntity = NoteEntity(note.id.id, note.title, note.markdown, note.html)
 }

@@ -47,6 +47,8 @@ dependencies {
     compile('org.springframework.boot:spring-boot-starter-webflux')
     compile('org.springframework.boot:spring-boot-starter-freemarker')
 
+    compile group: 'com.atlassian.commonmark', name: 'commonmark', version: '0.10.0'
+
     testCompile('org.springframework.boot:spring-boot-starter-test')
     testCompile('io.projectreactor:reactor-test')
 }

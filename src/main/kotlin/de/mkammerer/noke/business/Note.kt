@@ -5,7 +5,8 @@ import java.util.*
 data class Note(
         val id: Id,
         val title: String,
-        val content: String
+        val markdown: String,
+        val html: String
 ) {
     data class Id(val id: UUID) {
         companion object {

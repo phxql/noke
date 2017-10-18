@@ -9,7 +9,7 @@ interface NoteService {
 
     fun findById(id: Note.Id): Mono<Note>
 
-    fun add(title: String, content: String): Mono<Note>
+    fun add(title: String, markdown: String): Mono<Note>
 
     fun delete(id: Note.Id): Mono<Boolean>
 }
@@ -27,15 +27,16 @@ interface NoteRepository {
 @Service
 class NoteServiceImpl(
         private val noteRepository: NoteRepository,
-        private val uuidFactory: UUIDFactory
+        private val uuidFactory: UUIDFactory,
+        private val markdownRenderer: MarkdownRenderer
 ) : NoteService {
     override fun listAll(): Flux<Note> = noteRepository.listAll()
 
     override fun findById(id: Note.Id): Mono<Note> = noteRepository.findById(id)
 
-    override fun add(title: String, content: String): Mono<Note> {
+    override fun add(title: String, markdown: String): Mono<Note> {
         return uuidFactory.create()
-                .map { id -> Note(Note.Id(id), title, content) }
+                .map { id -> Note(Note.Id(id), title, markdown, markdownRenderer.render(markdown)) }
                 .flatMap { note -> noteRepository.add(note) }
     }
 

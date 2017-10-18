@@ -9,5 +9,6 @@ data class NoteEntity(
         @PrimaryKey
         val id: UUID,
         val title: String,
-        val content: String
+        val markdown: String,
+        val html: String
 )
