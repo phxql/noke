@@ -1,12 +1,14 @@
 package de.mkammerer.noke.business
 
+import java.time.ZonedDateTime
 import java.util.*
 
 data class Note(
         val id: Id,
         val title: String,
         val markdown: String,
-        val html: String
+        val html: String,
+        val created: ZonedDateTime
 ) {
     data class Id(val id: UUID) {
         companion object {

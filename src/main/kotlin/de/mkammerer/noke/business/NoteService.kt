@@ -32,7 +32,8 @@ interface NoteRepository {
 class NoteServiceImpl(
         private val noteRepository: NoteRepository,
         private val uuidFactory: UUIDFactory,
-        private val markdownRenderer: MarkdownRenderer
+        private val markdownRenderer: MarkdownRenderer,
+        private val clock: Clock
 ) : NoteService {
     override fun listAll(): Flux<Note> = noteRepository.listAll()
 
@@ -40,7 +41,7 @@ class NoteServiceImpl(
 
     override fun add(title: String, markdown: String): Mono<Note> {
         return uuidFactory.create()
-                .map { id -> Note(Note.Id(id), title, markdown, markdownRenderer.render(markdown)) }
+                .map { id -> Note(Note.Id(id), title, markdown, markdownRenderer.render(markdown), clock.now()) }
                 .flatMap { note -> noteRepository.add(note) }
     }
 
@@ -48,7 +49,7 @@ class NoteServiceImpl(
 
     override fun edit(id: Note.Id, title: String, markdown: String): Mono<Note> {
         return noteRepository.findById(id)
-                .map { note -> Note(note.id, title, markdown, markdownRenderer.render(markdown)) }
+                .map { note -> Note(note.id, title, markdown, markdownRenderer.render(markdown), note.created) }
                 .flatMap { newNote -> noteRepository.update(id, newNote) }
     }
 }

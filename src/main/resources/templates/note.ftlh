@@ -3,6 +3,7 @@
 <#include "includes/header.ftlh">
 
 <h1>${note.title}</h1>
+<p><i>Created: ${note.created}</i></p>
 
 <div>
 ${note.html?no_esc}

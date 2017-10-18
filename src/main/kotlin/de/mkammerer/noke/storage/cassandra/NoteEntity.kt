@@ -2,6 +2,7 @@ package de.mkammerer.noke.storage.cassandra
 
 import org.springframework.data.cassandra.core.mapping.PrimaryKey
 import org.springframework.data.cassandra.core.mapping.Table
+import java.time.LocalDateTime
 import java.util.*
 
 @Table("note")
@@ -10,5 +11,7 @@ data class NoteEntity(
         val id: UUID,
         val title: String,
         val markdown: String,
-        val html: String
+        val html: String,
+        val created: LocalDateTime,
+        val timezone: String
 )
