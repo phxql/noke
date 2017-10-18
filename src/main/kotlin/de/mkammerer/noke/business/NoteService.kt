@@ -10,6 +10,8 @@ interface NoteService {
     fun findById(id: Note.Id): Mono<Note>
 
     fun add(title: String, content: String): Mono<Note>
+
+    fun delete(id: Note.Id): Mono<Boolean>
 }
 
 interface NoteRepository {
@@ -18,6 +20,8 @@ interface NoteRepository {
     fun findById(id: Note.Id): Mono<Note>
 
     fun add(note: Note): Mono<Note>
+
+    fun delete(id: Note.Id): Mono<Boolean>
 }
 
 @Service
@@ -34,4 +38,6 @@ class NoteServiceImpl(
                 .map { id -> Note(Note.Id(id), title, content) }
                 .flatMap { note -> noteRepository.add(note) }
     }
+
+    override fun delete(id: Note.Id): Mono<Boolean> = noteRepository.delete(id)
 }

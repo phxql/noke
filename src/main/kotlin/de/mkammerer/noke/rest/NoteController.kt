@@ -28,6 +28,12 @@ class NoteController(
                 .map { "redirect:/" }
     }
 
+    @PostMapping("{noteId}/delete", consumes = arrayOf(MediaType.APPLICATION_FORM_URLENCODED_VALUE))
+    fun deleteNote(@PathVariable noteId: String): Mono<String> {
+        return noteService.delete(Note.Id.parse(noteId))
+                .map { "redirect:/" }
+    }
+
     class AddNoteForm(
             var title: String,
             var content: String

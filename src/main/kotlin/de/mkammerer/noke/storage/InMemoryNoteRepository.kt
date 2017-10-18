@@ -32,4 +32,11 @@ class InMemoryNoteRepository : NoteRepository {
             sink.success(note)
         }
     }
+
+    override fun delete(id: Note.Id): Mono<Boolean> {
+        return Mono.create { sink ->
+            val removed = notes.removeIf { it.id == id }
+            sink.success(removed)
+        }
+    }
 }

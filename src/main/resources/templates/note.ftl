@@ -8,4 +8,8 @@
 ${note.content}
 </pre>
 
+<form action="<@spring.url "/note/${note.id}/delete"/>" method="post">
+    <input type="submit" value="Delete note"/>
+</form>
+
 <#include "includes/footer.ftl">
