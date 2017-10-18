@@ -13,6 +13,6 @@
 </ul>
 
 
-<a href="<@spring.url "note/add"/>">Add note</a>
+<a href="<@spring.url "note/add"/>" class="btn btn-success">Add note</a>
 
 <#include "includes/footer.ftlh">

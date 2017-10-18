@@ -31,6 +31,11 @@ class CassandraNoteRepository(
                 .defaultIfEmpty(true)
     }
 
+    override fun update(id: Note.Id, newNote: Note): Mono<Note> {
+        return repository.save(toEntity(newNote))
+                .map { entity -> fromEntity(entity) }
+    }
+
     private fun fromEntity(entity: NoteEntity): Note = Note(Note.Id(entity.id), entity.title, entity.markdown, entity.html)
 
     private fun toEntity(note: Note): NoteEntity = NoteEntity(note.id.id, note.title, note.markdown, note.html)

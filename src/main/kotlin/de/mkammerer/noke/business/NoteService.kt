@@ -12,6 +12,8 @@ interface NoteService {
     fun add(title: String, markdown: String): Mono<Note>
 
     fun delete(id: Note.Id): Mono<Boolean>
+
+    fun edit(id: Note.Id, title: String, markdown: String): Mono<Note>
 }
 
 interface NoteRepository {
@@ -22,6 +24,8 @@ interface NoteRepository {
     fun add(note: Note): Mono<Note>
 
     fun delete(id: Note.Id): Mono<Boolean>
+
+    fun update(id: Note.Id, newNote: Note): Mono<Note>
 }
 
 @Service
@@ -41,4 +45,10 @@ class NoteServiceImpl(
     }
 
     override fun delete(id: Note.Id): Mono<Boolean> = noteRepository.delete(id)
+
+    override fun edit(id: Note.Id, title: String, markdown: String): Mono<Note> {
+        return noteRepository.findById(id)
+                .map { note -> Note(note.id, title, markdown, markdownRenderer.render(markdown)) }
+                .flatMap { newNote -> noteRepository.update(id, newNote) }
+    }
 }

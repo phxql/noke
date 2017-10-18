@@ -31,4 +31,13 @@ class InMemoryNoteRepository : NoteRepository {
             sink.success(removed)
         }
     }
+
+    override fun update(id: Note.Id, newNote: Note): Mono<Note> {
+        return Mono.create { sink ->
+            notes.replaceAll { it ->
+                if (it.id == id) newNote else it
+            }
+            sink.success(newNote)
+        }
+    }
 }
